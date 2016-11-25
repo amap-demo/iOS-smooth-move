@@ -8,11 +8,13 @@ annotation移动及转向动画
 - 工程基于iOS 3D地图SDK实现
 - 运行demo请先执行pod install --repo-update 安装依赖库，完成后打开.xcworkspace 文件
 
-### 核心类/接口 ##
+### 核心类/接口
 | 类    | 接口  | 说明   | 版本  |
 | -----|:-----:|:-----:|:-----:|
 | MAMapview	| - (void)addOverlay:(id <MAOverlay>)overlay; | 添加轨迹线 | v4.0.0 |
 | MAMapview	| - (void)addAnnotation:(id <MAAnnotation>)annotation; | 添加汽车 | v4.0.0 |
+| MovingAnnotationView	| - (void)addTrackingAnimationForPoints:(NSArray *)points duration:(CFTimeInterval)duration; | 添加动画 | n/a |
+| CACoordLayer	| - (void)display; | 显示当前帧 | n/a |
 
 ### 核心实现
 - MovingAnnotationView 自定义annotationview，其layer是自定义的CACoordLayer
