@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[AMapServices sharedServices] setEnableHTTPS:YES];
     // Override point for customization after application launch.
     self.window.rootViewController =  [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
