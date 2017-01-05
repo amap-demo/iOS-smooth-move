@@ -5,30 +5,66 @@ annotation移动及转向动画
 
 ### 使用教程
 
-- 使用方法
+- 添加MAAnimatedAnnotation
 ```
-/*!
- @brief 添加动画
- @param points 轨迹点串，每个轨迹点为TracingPoint类型
- @param duration 动画时长，包括从上一个动画的终止点过渡到新增动画起始点的时间
- */
-- (void)addTrackingAnimationForPoints:(NSArray *)points duration:(CFTimeInterval)duration;
- ```
-其中，轨迹点类型为：
- ```
-@interface TracingPoint : NSObject
-/*!
- @brief 轨迹经纬度
- */
-@property (nonatomic) CLLocationCoordinate2D coordinate;
-/*!
- @brief 方向，有效范围0~359.9度
- */
-@property (nonatomic) CLLocationDirection course;
-@end
+- (void)initRoute {
+    int count = sizeof(s_coords) / sizeof(s_coords[0]);
+    
+    self.fullTraceLine = [MAPolyline polylineWithCoordinates:s_coords count:count];
+    [self.mapView addOverlay:self.fullTraceLine];
+    
+    NSMutableArray * routeAnno = [NSMutableArray array];
+    for (int i = 0 ; i < count; i++) {
+        MAPointAnnotation * a = [[MAPointAnnotation alloc] init];
+        a.coordinate = s_coords[i];
+        a.title = @"route";
+        [routeAnno addObject:a];
+    }
+    [self.mapView addAnnotations:routeAnno];
+    [self.mapView showAnnotations:routeAnno animated:NO];
+    
+    self.car1 = [[MAAnimatedAnnotation alloc] init];
+    self.car1.title = @"Car1";
+    [self.mapView addAnnotation:self.car1];
+    
+    __weak typeof(self) weakSelf = self;
+    self.car2 = [[CustomMovingAnnotation alloc] init];
+    self.car2.stepCallback = ^() {
+        [weakSelf updatePassedTrace];
+    };
+    self.car2.title = @"Car2";
+    [self.mapView addAnnotation:self.car2];
+    
+    [self.car1 setCoordinate:s_coords[0]];
+    [self.car2 setCoordinate:s_coords[0]];
+}
+
+```
+- 开启动画
+```
+- (void)mov {
+    double speed_car1 = 80.0 / 3.6; //80 km/h
+    int count = sizeof(s_coords) / sizeof(s_coords[0]);
+    [self.car1 setCoordinate:s_coords[0]];
+    [self.car1 addMoveAnimationWithKeyCoordinates:s_coords count:count withDuration:self.sumDistance / speed_car1 withName:nil completeCallback:^(BOOL isFinished) {
+        ;
+    }];
+    
+    
+    //小车2走过的轨迹置灰色, 采用添加多个动画方法
+    double speed_car2 = 60.0 / 3.6; //60 km/h
+    __weak typeof(self) weakSelf = self;
+    [self.car2 setCoordinate:s_coords[0]];
+    self.passedTraceCoordIndex = 0;
+    for(int i = 1; i < count; ++i) {
+        NSNumber *num = [self.distanceArray objectAtIndex:i - 1];
+        [self.car2 addMoveAnimationWithKeyCoordinates:&(s_coords[i]) count:1 withDuration:num.doubleValue / speed_car2 withName:nil completeCallback:^(BOOL isFinished) {
+            weakSelf.passedTraceCoordIndex = i;
+        }];
+    }
+}
 ```
 
-注：多次调用添加动画接口，会按调用顺序依次执行添加的动画。
 
 
 ### 截图效果
