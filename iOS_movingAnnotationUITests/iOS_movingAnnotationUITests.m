@@ -36,15 +36,17 @@
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     
+    sleep(5);
+    
     XCUIApplication *app = [[XCUIApplication alloc] init];
     [app.buttons[@"move"] tap];
     
     
-    sleep(10);
+    sleep(20);
     
     [app.images[@"car1"] tap];
     
-    sleep(30);
+    sleep(40);
     
     [app.buttons[@"stop"] tap];
     
