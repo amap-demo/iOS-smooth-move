@@ -119,6 +119,10 @@ static CLLocationCoordinate2D s_coords[] =
 @implementation ViewController
 
 #pragma mark - Map Delegate
+- (void)mapInitComplete:(MAMapView *)mapView {
+    [self initRoute];
+}
+
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
     if (annotation == self.car1) {
@@ -230,7 +234,6 @@ static CLLocationCoordinate2D s_coords[] =
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self initRoute];
 }
 
 - (void)initRoute {
@@ -311,16 +314,27 @@ static CLLocationCoordinate2D s_coords[] =
     for(MAAnnotationMoveAnimation *animation in [self.car1 allMoveAnimations]) {
         [animation cancel];
     }
+    self.car1.movingDirection = 0;
     [self.car1 setCoordinate:s_coords[0]];
 
     for(MAAnnotationMoveAnimation *animation in [self.car2 allMoveAnimations]) {
         [animation cancel];
     }
+    self.car2.movingDirection = 0;
     [self.car2 setCoordinate:s_coords[0]];
+    
+    if(self.passedTraceLine) {
+        [self.mapView removeOverlay:self.passedTraceLine];
+        self.passedTraceLine = nil;
+    }
 }
 
 //小车2走过的轨迹置灰色
 - (void)updatePassedTrace {
+    if(self.car2.isAnimationFinished) {
+        return;
+    }
+    
     if(self.passedTraceLine) {
         [self.mapView removeOverlay:self.passedTraceLine];
     }
