@@ -69,4 +69,4 @@ annotation移动及转向动画
 
 ### 截图效果
 
-![result](https://raw.githubusercontent.com/amap-demo/iOS-smooth-move/master/ios_movingAnnotation_demo_gif.gif)
+![result](https://raw.githubusercontent.com/amap-demo/iOS-smooth-move/master/ios_movingAnnotation_demo.PNG)
