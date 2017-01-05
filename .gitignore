@@ -60,4 +60,4 @@ fastlane/screenshots
 iOSInjectionProject/
 
 #
-*.xcworkspace
+.DS_Store

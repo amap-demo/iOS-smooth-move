@@ -265,35 +265,6 @@ static CLLocationCoordinate2D s_coords[] =
     [self.car2 setCoordinate:s_coords[0]];
 }
 
-
-- (BOOL)isPointInLine:(CLLocationCoordinate2D)loc beginLoc:(CLLocationCoordinate2D)begin endLoc:(CLLocationCoordinate2D)end {
-    if((loc.latitude == begin.latitude && loc.latitude == begin.longitude) ||
-       (loc.latitude >= end.latitude && loc.longitude <= end.longitude)) {
-        return YES;
-    }
-    
-    if(begin.latitude == end.latitude && begin.longitude == end.longitude) {
-        return NO;
-    }
-    
-    CGPoint vector1 = CGPointMake(loc.latitude - begin.latitude, loc.longitude - begin.longitude);
-    CGPoint vector2 = CGPointMake(end.latitude - loc.latitude, end.longitude - loc.longitude);
-    
-    CGFloat length1 = vector1.x * vector1.x + vector1.y * vector1.y;
-    CGPoint normalizedVector1 = CGPointMake(vector1.x / length1 , vector1.y / length1);
-    
-    CGFloat length2 = vector2.x * vector2.x + vector2.y * vector2.y;
-    CGPoint normalizedVector2 = CGPointMake(vector2.x / length2 , vector2.y / length2);
-    
-    CGPoint p = CGPointMake(normalizedVector2.x - normalizedVector1.x, normalizedVector2.y - normalizedVector1.y);
-    CGFloat temp = p.x * p.x + p.y * p.y;
-    if (temp < 0.00001) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 - (void)initBtn {
     UIButton * btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn.frame = CGRectMake(0, 100, 60, 40);
