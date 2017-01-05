@@ -10,6 +10,14 @@
 
 @implementation CustomMovingAnnotation
 
+- (void)step:(CGFloat)timeDelta {
+    [super step:timeDelta];
+    
+    if(self.stepCallback) {
+        self.stepCallback();
+    }
+}
+
 - (CLLocationDirection)rotateDegree {
     return 0;
 }

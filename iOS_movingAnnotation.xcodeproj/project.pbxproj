@@ -28,6 +28,7 @@
 		B6F8F9F41E1CDA5A0036D1DC /* CustomMovingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F8F9F31E1CDA5A0036D1DC /* CustomMovingAnnotation.m */; };
 		B6F8F9FD1E1D01AC0036D1DC /* car1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B6F8F9FB1E1D01AC0036D1DC /* car1@2x.png */; };
 		B6F8F9FE1E1D01AC0036D1DC /* car2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B6F8F9FC1E1D01AC0036D1DC /* car2@2x.png */; };
+		B6F8FA061E1E45230036D1DC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B6F8FA051E1E45230036D1DC /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +54,12 @@
 		B6152BE41DBDDCB800254FC8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B6152BE61DBDDCC200254FC8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		B6152BE81DBDDCCD00254FC8 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		B6F8F9EC1E1CD9A60036D1DC /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		B6F8F9EC1E1CD9A60036D1DC /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B6F8F9F21E1CDA5A0036D1DC /* CustomMovingAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMovingAnnotation.h; sourceTree = "<group>"; };
 		B6F8F9F31E1CDA5A0036D1DC /* CustomMovingAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMovingAnnotation.m; sourceTree = "<group>"; };
 		B6F8F9FB1E1D01AC0036D1DC /* car1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car1@2x.png"; sourceTree = "<group>"; };
 		B6F8F9FC1E1D01AC0036D1DC /* car2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car2@2x.png"; sourceTree = "<group>"; };
+		B6F8FA051E1E45230036D1DC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CA36FDE9A1B8AC22DE9733C7 /* Pods-iOS_movingAnnotation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_movingAnnotation.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_movingAnnotation/Pods-iOS_movingAnnotation.release.xcconfig"; sourceTree = "<group>"; };
 		F7794DD1F93D43E5E79573BB /* Pods-iOS_movingAnnotation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_movingAnnotation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_movingAnnotation/Pods-iOS_movingAnnotation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 		B6152B871DBDDACB00254FC8 = {
 			isa = PBXGroup;
 			children = (
+				B6F8FA051E1E45230036D1DC /* README.md */,
 				B6F8F9EC1E1CD9A60036D1DC /* Podfile */,
 				B6152BAA1DBDDC2500254FC8 /* iOS_movingAnnotation */,
 				B6152B911DBDDACB00254FC8 /* Products */,
@@ -295,6 +298,7 @@
 			files = (
 				B6152BD51DBDDC2500254FC8 /* ViewController.m in Sources */,
 				B6F8F9F41E1CDA5A0036D1DC /* CustomMovingAnnotation.m in Sources */,
+				B6F8FA061E1E45230036D1DC /* README.md in Sources */,
 				B6152BCC1DBDDC2500254FC8 /* main.m in Sources */,
 				B6152BC61DBDDC2500254FC8 /* AppDelegate.m in Sources */,
 			);

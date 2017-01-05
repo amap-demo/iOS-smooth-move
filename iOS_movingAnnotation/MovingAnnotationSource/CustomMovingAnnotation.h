@@ -8,9 +8,11 @@
 
 #import <MAMapKit/MAMapKit.h>
 
-typedef void (^CustomMovingAnnotationCallback)(CLLocationCoordinate2D curLocation);
+typedef void (^CustomMovingAnnotationCallback)();
 
 @interface CustomMovingAnnotation : MAAnimatedAnnotation
+
+@property (nonatomic, copy) CustomMovingAnnotationCallback stepCallback;
 
 - (CLLocationDirection)rotateDegree;
 

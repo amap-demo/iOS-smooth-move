@@ -104,6 +104,15 @@ static CLLocationCoordinate2D s_coords[] =
 
 ///全轨迹overlay
 @property (nonatomic, strong) MAPolyline *fullTraceLine;
+///走过轨迹的overlay
+@property (nonatomic, strong) MAPolyline *passedTraceLine;
+@property (nonatomic, assign) int passedTraceCoordIndex;
+
+@property (nonatomic, strong) NSArray *distanceArray;
+@property (nonatomic, assign) double sumDistance;
+
+@property (nonatomic, weak) MAAnnotationView *car1View;
+@property (nonatomic, weak) MAAnnotationView *car2View;
 
 @end
 
@@ -123,9 +132,9 @@ static CLLocationCoordinate2D s_coords[] =
             
             UIImage *imge  =  [UIImage imageNamed:@"car1"];
             annotationView.image =  imge;
+            
+            self.car1View = annotationView;
         }
-        
-        annotationView.zIndex = 10;
 
         return annotationView;
     } else if(annotation == self.car2) {
@@ -139,9 +148,9 @@ static CLLocationCoordinate2D s_coords[] =
             
             UIImage *imge  =  [UIImage imageNamed:@"car2"];
             annotationView.image =  imge;
+            
+            self.car2View = annotationView;
         }
-        
-        annotationView.zIndex = 10;
         
         return annotationView;
     } else if([annotation isKindOfClass:[MAPointAnnotation class]]) {
@@ -152,12 +161,13 @@ static CLLocationCoordinate2D s_coords[] =
             annotationView.canShowCallout = YES;
         }
         
-        annotationView.zIndex = 0;
-        
         if ([annotation.title isEqualToString:@"route"]) {
             annotationView.enabled = NO;
             annotationView.image = [UIImage imageNamed:@"trackingPoints"];
         }
+        
+        [self.car1View.superview bringSubviewToFront:self.car1View];
+        [self.car2View.superview bringSubviewToFront:self.car2View];
         
         return annotationView;
     }
@@ -169,8 +179,15 @@ static CLLocationCoordinate2D s_coords[] =
     if(overlay == self.fullTraceLine) {
         MAPolylineRenderer *polylineView = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
         
-        polylineView.lineWidth   = 3.f;
+        polylineView.lineWidth   = 6.f;
         polylineView.strokeColor = [UIColor colorWithRed:0 green:0.47 blue:1.0 alpha:0.9];
+        
+        return polylineView;
+    } else if(overlay == self.passedTraceLine) {
+        MAPolylineRenderer *polylineView = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
+        
+        polylineView.lineWidth   = 6.f;
+        polylineView.strokeColor = [UIColor grayColor];
         
         return polylineView;
     }
@@ -194,6 +211,21 @@ static CLLocationCoordinate2D s_coords[] =
     [self.view addSubview:self.mapView];
     
     [self initBtn];
+    
+    
+    int count = sizeof(s_coords) / sizeof(s_coords[0]);
+    double sum = 0;
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:count];
+    for(int i = 0; i < count - 1; ++i) {
+        CLLocation *begin = [[CLLocation alloc] initWithLatitude:s_coords[i].latitude longitude:s_coords[i].longitude];
+        CLLocation *end = [[CLLocation alloc] initWithLatitude:s_coords[i+1].latitude longitude:s_coords[i+1].longitude];
+        CLLocationDistance distance = [end distanceFromLocation:begin];
+        [arr addObject:[NSNumber numberWithDouble:distance]];
+        sum += distance;
+    }
+    
+    self.distanceArray = arr;
+    self.sumDistance = sum;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -221,7 +253,11 @@ static CLLocationCoordinate2D s_coords[] =
     self.car1.title = @"Car1";
     [self.mapView addAnnotation:self.car1];
     
+    __weak typeof(self) weakSelf = self;
     self.car2 = [[CustomMovingAnnotation alloc] init];
+    self.car2.stepCallback = ^() {
+        [weakSelf updatePassedTrace];
+    };
     self.car2.title = @"Car2";
     [self.mapView addAnnotation:self.car2];
     
@@ -279,16 +315,25 @@ static CLLocationCoordinate2D s_coords[] =
 #pragma mark - Action
 
 - (void)mov {
+    double speed_car1 = 80.0 / 3.6; //80 km/h
     int count = sizeof(s_coords) / sizeof(s_coords[0]);
     [self.car1 setCoordinate:s_coords[0]];
-    [self.car1 addMoveAnimationWithKeyCoordinates:s_coords count:count withDuration:80 withName:nil completeCallback:^(BOOL isFinished) {
+    [self.car1 addMoveAnimationWithKeyCoordinates:s_coords count:count withDuration:self.sumDistance / speed_car1 withName:nil completeCallback:^(BOOL isFinished) {
         ;
     }];
     
+    
+    //小车2走过的轨迹置灰色, 采用添加多个动画方法
+    double speed_car2 = 60.0 / 3.6; //60 km/h
+    __weak typeof(self) weakSelf = self;
     [self.car2 setCoordinate:s_coords[0]];
-    [self.car2 addMoveAnimationWithKeyCoordinates:s_coords count:count withDuration:110 withName:nil completeCallback:^(BOOL isFinished) {
-        ;
-    }];
+    self.passedTraceCoordIndex = 0;
+    for(int i = 1; i < count; ++i) {
+        NSNumber *num = [self.distanceArray objectAtIndex:i - 1];
+        [self.car2 addMoveAnimationWithKeyCoordinates:&(s_coords[i]) count:1 withDuration:num.doubleValue / speed_car2 withName:nil completeCallback:^(BOOL isFinished) {
+            weakSelf.passedTraceCoordIndex = i;
+        }];
+    }
 }
 
 - (void)stop {
@@ -301,6 +346,25 @@ static CLLocationCoordinate2D s_coords[] =
         [animation cancel];
     }
     [self.car2 setCoordinate:s_coords[0]];
+}
+
+//小车2走过的轨迹置灰色
+- (void)updatePassedTrace {
+    if(self.passedTraceLine) {
+        [self.mapView removeOverlay:self.passedTraceLine];
+    }
+    
+    int needCount = self.passedTraceCoordIndex + 2;
+    CLLocationCoordinate2D *coords = malloc(sizeof(CLLocationCoordinate2D) * needCount);
+    
+    memcpy(coords, s_coords, sizeof(CLLocationCoordinate2D) * (self.passedTraceCoordIndex + 1));
+    coords[needCount - 1] = self.car2.coordinate;
+    self.passedTraceLine = [MAPolyline polylineWithCoordinates:coords count:needCount];
+    [self.mapView addOverlay:self.passedTraceLine];
+    
+    if(coords) {
+        free(coords);
+    }
 }
 
 @end
