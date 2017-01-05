@@ -533,10 +533,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YMJ372W38W;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FrameWorks",
-				);
 				INFOPLIST_FILE = iOS_movingAnnotation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MovingAnnotation;
@@ -553,10 +549,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = YMJ372W38W;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FrameWorks",
-				);
 				INFOPLIST_FILE = iOS_movingAnnotation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.autonavi.MovingAnnotation;
@@ -576,6 +568,7 @@
 				6A2D0F781E1E59220036ACED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B6152B8B1DBDDACB00254FC8 /* Build configuration list for PBXProject "iOS_movingAnnotation" */ = {
 			isa = XCConfigurationList;
