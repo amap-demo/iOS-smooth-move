@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6A2D0F6E1E1E59220036ACED"
+               BuildableName = "iOS_movingAnnotationUITests.xctest"
+               BlueprintName = "iOS_movingAnnotationUITests"
+               ReferencedContainer = "container:iOS_movingAnnotation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

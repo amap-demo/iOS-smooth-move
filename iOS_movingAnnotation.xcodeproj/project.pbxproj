@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A2D0F721E1E59220036ACED /* iOS_movingAnnotationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2D0F711E1E59220036ACED /* iOS_movingAnnotationUITests.m */; };
 		98B766D7F708D1D5E566AAEF /* libPods-iOS_movingAnnotation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A61466DFB0C4F1F4FC555D /* libPods-iOS_movingAnnotation.a */; };
 		B6152BC61DBDDC2500254FC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B6152BAC1DBDDC2500254FC8 /* AppDelegate.m */; };
 		B6152BC71DBDDC2500254FC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6152BAD1DBDDC2500254FC8 /* Assets.xcassets */; };
@@ -30,7 +31,20 @@
 		B6F8F9FE1E1D01AC0036D1DC /* car2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B6F8F9FC1E1D01AC0036D1DC /* car2@2x.png */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6A2D0F741E1E59220036ACED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6152B881DBDDACB00254FC8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6152B8F1DBDDACB00254FC8;
+			remoteInfo = iOS_movingAnnotation;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6A2D0F6F1E1E59220036ACED /* iOS_movingAnnotationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_movingAnnotationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A2D0F711E1E59220036ACED /* iOS_movingAnnotationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_movingAnnotationUITests.m; sourceTree = "<group>"; };
+		6A2D0F731E1E59220036ACED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70A61466DFB0C4F1F4FC555D /* libPods-iOS_movingAnnotation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS_movingAnnotation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6152B901DBDDACB00254FC8 /* iOS_movingAnnotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_movingAnnotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6152BAB1DBDDC2500254FC8 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -64,6 +78,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6A2D0F6C1E1E59220036ACED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6152B8D1DBDDACB00254FC8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,12 +102,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A2D0F701E1E59220036ACED /* iOS_movingAnnotationUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6A2D0F711E1E59220036ACED /* iOS_movingAnnotationUITests.m */,
+				6A2D0F731E1E59220036ACED /* Info.plist */,
+			);
+			path = iOS_movingAnnotationUITests;
+			sourceTree = "<group>";
+		};
 		B6152B871DBDDACB00254FC8 = {
 			isa = PBXGroup;
 			children = (
 				B6F8FA051E1E45230036D1DC /* README.md */,
 				B6F8F9EC1E1CD9A60036D1DC /* Podfile */,
 				B6152BAA1DBDDC2500254FC8 /* iOS_movingAnnotation */,
+				6A2D0F701E1E59220036ACED /* iOS_movingAnnotationUITests */,
 				B6152B911DBDDACB00254FC8 /* Products */,
 				B6152BDD1DBDDCA100254FC8 /* Frameworks */,
 				F17F88ACD31DBE6A511AD6D0 /* Pods */,
@@ -97,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				B6152B901DBDDACB00254FC8 /* iOS_movingAnnotation.app */,
+				6A2D0F6F1E1E59220036ACED /* iOS_movingAnnotationUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,6 +200,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6A2D0F6E1E1E59220036ACED /* iOS_movingAnnotationUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A2D0F761E1E59220036ACED /* Build configuration list for PBXNativeTarget "iOS_movingAnnotationUITests" */;
+			buildPhases = (
+				6A2D0F6B1E1E59220036ACED /* Sources */,
+				6A2D0F6C1E1E59220036ACED /* Frameworks */,
+				6A2D0F6D1E1E59220036ACED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6A2D0F751E1E59220036ACED /* PBXTargetDependency */,
+			);
+			name = iOS_movingAnnotationUITests;
+			productName = iOS_movingAnnotationUITests;
+			productReference = 6A2D0F6F1E1E59220036ACED /* iOS_movingAnnotationUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B6152B8F1DBDDACB00254FC8 /* iOS_movingAnnotation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B6152BA71DBDDACB00254FC8 /* Build configuration list for PBXNativeTarget "iOS_movingAnnotation" */;
@@ -197,6 +247,12 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = yours;
 				TargetAttributes = {
+					6A2D0F6E1E1E59220036ACED = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = YMJ372W38W;
+						ProvisioningStyle = Manual;
+						TestTargetID = B6152B8F1DBDDACB00254FC8;
+					};
 					B6152B8F1DBDDACB00254FC8 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = YMJ372W38W;
@@ -218,11 +274,19 @@
 			projectRoot = "";
 			targets = (
 				B6152B8F1DBDDACB00254FC8 /* iOS_movingAnnotation */,
+				6A2D0F6E1E1E59220036ACED /* iOS_movingAnnotationUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6A2D0F6D1E1E59220036ACED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6152B8E1DBDDACB00254FC8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +355,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6A2D0F6B1E1E59220036ACED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A2D0F721E1E59220036ACED /* iOS_movingAnnotationUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B6152B8C1DBDDACB00254FC8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,6 +375,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6A2D0F751E1E59220036ACED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6152B8F1DBDDACB00254FC8 /* iOS_movingAnnotation */;
+			targetProxy = 6A2D0F741E1E59220036ACED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B6152BAE1DBDDC2500254FC8 /* Main.storyboard */ = {
@@ -324,6 +404,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6A2D0F771E1E59220036ACED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = YMJ372W38W;
+				INFOPLIST_FILE = iOS_movingAnnotationUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.autonavi.iOS-movingAnnotationUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b821a78-8ad6-4cf7-b6b0-31b43df04bbe";
+				PROVISIONING_PROFILE_SPECIFIER = openPlatform_development;
+				TEST_TARGET_NAME = iOS_movingAnnotation;
+			};
+			name = Debug;
+		};
+		6A2D0F781E1E59220036ACED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = YMJ372W38W;
+				INFOPLIST_FILE = iOS_movingAnnotationUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.autonavi.iOS-movingAnnotationUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9b821a78-8ad6-4cf7-b6b0-31b43df04bbe";
+				PROVISIONING_PROFILE_SPECIFIER = openPlatform_development;
+				TEST_TARGET_NAME = iOS_movingAnnotation;
+			};
+			name = Release;
+		};
 		B6152BA51DBDDACB00254FC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -457,6 +569,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6A2D0F761E1E59220036ACED /* Build configuration list for PBXNativeTarget "iOS_movingAnnotationUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A2D0F771E1E59220036ACED /* Debug */,
+				6A2D0F781E1E59220036ACED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B6152B8B1DBDDACB00254FC8 /* Build configuration list for PBXProject "iOS_movingAnnotation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
