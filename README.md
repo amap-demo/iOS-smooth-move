@@ -7,7 +7,23 @@ annotation移动及转向动画
 
 - 添加MAAnimatedAnnotation
 ```
-self.car1 = [[MAAnimatedAnnotation alloc] init];
+- (void)initRoute {
+    int count = sizeof(s_coords) / sizeof(s_coords[0]);
+    
+    self.fullTraceLine = [MAPolyline polylineWithCoordinates:s_coords count:count];
+    [self.mapView addOverlay:self.fullTraceLine];
+    
+    NSMutableArray * routeAnno = [NSMutableArray array];
+    for (int i = 0 ; i < count; i++) {
+        MAPointAnnotation * a = [[MAPointAnnotation alloc] init];
+        a.coordinate = s_coords[i];
+        a.title = @"route";
+        [routeAnno addObject:a];
+    }
+    [self.mapView addAnnotations:routeAnno];
+    [self.mapView showAnnotations:routeAnno animated:NO];
+    
+    self.car1 = [[MAAnimatedAnnotation alloc] init];
     self.car1.title = @"Car1";
     [self.mapView addAnnotation:self.car1];
     
@@ -18,6 +34,11 @@ self.car1 = [[MAAnimatedAnnotation alloc] init];
     };
     self.car2.title = @"Car2";
     [self.mapView addAnnotation:self.car2];
+    
+    [self.car1 setCoordinate:s_coords[0]];
+    [self.car2 setCoordinate:s_coords[0]];
+}
+
 ```
 - 开启动画
 ```
