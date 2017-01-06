@@ -289,7 +289,7 @@ static CLLocationCoordinate2D s_coords[] =
 #pragma mark - Action
 
 - (void)mov {
-    double speed_car1 = 80.0 / 3.6; //80 km/h
+    double speed_car1 = 120.0 / 3.6; //80 km/h
     int count = sizeof(s_coords) / sizeof(s_coords[0]);
     [self.car1 setCoordinate:s_coords[0]];
     [self.car1 addMoveAnimationWithKeyCoordinates:s_coords count:count withDuration:self.sumDistance / speed_car1 withName:nil completeCallback:^(BOOL isFinished) {
@@ -298,7 +298,7 @@ static CLLocationCoordinate2D s_coords[] =
     
     
     //小车2走过的轨迹置灰色, 采用添加多个动画方法
-    double speed_car2 = 60.0 / 3.6; //60 km/h
+    double speed_car2 = 100.0 / 3.6; //60 km/h
     __weak typeof(self) weakSelf = self;
     [self.car2 setCoordinate:s_coords[0]];
     self.passedTraceCoordIndex = 0;
