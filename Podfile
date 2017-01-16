@@ -7,3 +7,10 @@ target 'iOS_movingAnnotation' do
     pod 'AMapSearch'
 
 end
+
+target 'iOS_movingAnnotation_swift' do
+    
+    pod 'AMap3DMap', '4.6.0'
+    pod 'AMapSearch'
+    
+end
