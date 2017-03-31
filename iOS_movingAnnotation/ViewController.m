@@ -114,6 +114,8 @@ static CLLocationCoordinate2D s_coords[] =
 @property (nonatomic, weak) MAAnnotationView *car1View;
 @property (nonatomic, weak) MAAnnotationView *car2View;
 
+@property (nonatomic, strong) NSMutableArray *carsArray;
+
 @end
 
 @implementation ViewController
@@ -125,7 +127,7 @@ static CLLocationCoordinate2D s_coords[] =
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
-    if (annotation == self.car1) {
+    if (annotation == self.car1 || [self.carsArray containsObject:annotation]) {
         NSString *pointReuseIndetifier = @"pointReuseIndetifier1";
         
         MAAnnotationView *annotationView = (MAAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndetifier];
@@ -137,7 +139,9 @@ static CLLocationCoordinate2D s_coords[] =
             UIImage *imge  =  [UIImage imageNamed:@"car1"];
             annotationView.image =  imge;
             
-            self.car1View = annotationView;
+            if(annotation == self.car1) {
+                self.car1View = annotationView;
+            }
         }
 
         return annotationView;
@@ -209,7 +213,7 @@ static CLLocationCoordinate2D s_coords[] =
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.mapView = [[MAMapView alloc] initWithFrame:self.view.frame];
+    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
@@ -266,6 +270,43 @@ static CLLocationCoordinate2D s_coords[] =
     
     [self.car1 setCoordinate:s_coords[0]];
     [self.car2 setCoordinate:s_coords[0]];
+    
+    
+#if 0
+    const int carCount = 100;
+    self.carsArray = [NSMutableArray arrayWithCapacity:carCount];
+    for(int i = 0; i < carCount; ++i) {
+        MAAnimatedAnnotation *car = [[MAAnimatedAnnotation alloc] init];
+        car.title = [NSString stringWithFormat:@"car_%d", i];
+        float deltaX = ((float)(rand() % 100)) / 1000.0;
+        float deltaY = ((float)(rand() % 100)) / 1000.0;
+        car.coordinate = CLLocationCoordinate2DMake(39.97617053371078 + deltaX, 116.3499049793749 + deltaY);
+        [self.carsArray addObject:car];
+    }
+    [self.mapView addAnnotations:self.carsArray];
+    
+    [NSTimer scheduledTimerWithTimeInterval:5 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        int temp = rand() % 10;
+        for(int i = 0; i < carCount; ++i) {
+            if(i % temp == 0) {
+                MAAnimatedAnnotation *car = [self.carsArray objectAtIndex:i];
+                float deltaX = ((float)(rand() % 10)) / 1000.0;
+                float deltaY = ((float)(rand() % 10)) / 1000.0;
+                CLLocationCoordinate2D coord = car.coordinate;
+                if(i % 2 == 0) {
+                    coord.latitude += deltaX;
+                    coord.longitude += deltaY;
+                } else {
+                    coord.latitude -= deltaX;
+                    coord.longitude -= deltaY;
+                }
+                [car addMoveAnimationWithKeyCoordinates:&coord count:1 withDuration:1 withName:nil completeCallback:^(BOOL isFinished) {
+                    ;
+                }];
+            }
+        }
+    }];
+#endif
 }
 
 - (void)initBtn {
