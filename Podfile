@@ -3,14 +3,14 @@ platform :ios, '7.0'
 
 target 'iOS_movingAnnotation' do
 
-    pod 'AMap3DMap', '4.6.0'
+    pod 'AMap3DMap'
     pod 'AMapSearch'
 
 end
 
 target 'iOS_movingAnnotation_swift' do
     
-    pod 'AMap3DMap', '4.6.0'
+    pod 'AMap3DMap'
     pod 'AMapSearch'
     
 end
