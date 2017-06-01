@@ -1,7 +1,10 @@
 # iOS_smooth_move
 annotation移动及转向动画
--请先执行pod install --repo-update 安装依赖库
--查看Demo请打开.xcworkspace文件
+
+- [高德官网申请Key](http://lbs.amap.com/dev/#/).
+- 阅读[开发指南](http://lbs.amap.com/api/ios-sdk/summary/).
+- 请先执行pod install --repo-update 安装依赖库
+- 查看Demo请打开.xcworkspace文件
 
 ## 核心类/接口 ##
 | 类    | 接口  | 说明   | 版本  |
