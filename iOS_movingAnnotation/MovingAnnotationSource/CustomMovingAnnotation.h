@@ -7,10 +7,11 @@
 //
 
 #import <MAMapKit/MAMapKit.h>
+#import "PausableMovingAnnotation.h"
 
 typedef void (^CustomMovingAnnotationCallback)();
 
-@interface CustomMovingAnnotation : MAAnimatedAnnotation
+@interface CustomMovingAnnotation : PausableMovingAnnotation
 
 @property (nonatomic, copy) CustomMovingAnnotationCallback stepCallback;
 

@@ -98,7 +98,7 @@ static CLLocationCoordinate2D s_coords[] =
 @property (nonatomic, strong) MAMapView *mapView;
 
 ///车头方向跟随转动
-@property (nonatomic, strong) MAAnimatedAnnotation *car1;
+@property (nonatomic, strong) PausableMovingAnnotation *car1;
 ///车头方向不跟随转动
 @property (nonatomic, strong) CustomMovingAnnotation *car2;
 
@@ -256,7 +256,7 @@ static CLLocationCoordinate2D s_coords[] =
     [self.mapView addAnnotations:routeAnno];
     [self.mapView showAnnotations:routeAnno animated:NO];
     
-    self.car1 = [[MAAnimatedAnnotation alloc] init];
+    self.car1 = [[PausableMovingAnnotation alloc] init];
     self.car1.title = @"Car1";
     [self.mapView addAnnotation:self.car1];
     
@@ -325,6 +325,14 @@ static CLLocationCoordinate2D s_coords[] =
     [btn1 addTarget:self action:@selector(stop) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:btn1];
+    
+    UIButton * btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn2.frame = CGRectMake(0, 300, 60, 40);
+    btn2.backgroundColor = [UIColor grayColor];
+    [btn2 setTitle:@"pause" forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(pause:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btn2];
 }
 
 #pragma mark - Action
@@ -367,6 +375,16 @@ static CLLocationCoordinate2D s_coords[] =
     if(self.passedTraceLine) {
         [self.mapView removeOverlay:self.passedTraceLine];
         self.passedTraceLine = nil;
+    }
+}
+
+- (void)pause:(UIButton*)btn {
+    self.car2.isPaused = self.car1.isPaused = !self.car1.isPaused;
+    
+    if(self.car1.isPaused) {
+        [btn setTitle:@"resume" forState:UIControlStateNormal];
+    } else {
+        [btn setTitle:@"pause" forState:UIControlStateNormal];
     }
 }
 

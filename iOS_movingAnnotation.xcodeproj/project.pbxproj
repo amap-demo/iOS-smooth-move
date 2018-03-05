@@ -26,6 +26,7 @@
 		B6152BE51DBDDCB800254FC8 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B6152BE41DBDDCB800254FC8 /* libc++.tbd */; };
 		B6152BE71DBDDCC200254FC8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6152BE61DBDDCC200254FC8 /* CoreTelephony.framework */; };
 		B6152BE91DBDDCCD00254FC8 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6152BE81DBDDCCD00254FC8 /* JavaScriptCore.framework */; };
+		B63E7088204D67FD00EA7ECE /* PausableMovingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B63E7087204D67FD00EA7ECE /* PausableMovingAnnotation.m */; };
 		B6F63DF91E2C6AA400741516 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F63DF81E2C6AA400741516 /* AppDelegate.swift */; };
 		B6F63DFB1E2C6AA400741516 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F63DFA1E2C6AA400741516 /* ViewController.swift */; };
 		B6F63DFE1E2C6AA400741516 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6F63DFC1E2C6AA400741516 /* Main.storyboard */; };
@@ -81,6 +82,8 @@
 		B6152BE41DBDDCB800254FC8 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B6152BE61DBDDCC200254FC8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		B6152BE81DBDDCCD00254FC8 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		B63E7086204D67FD00EA7ECE /* PausableMovingAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PausableMovingAnnotation.h; sourceTree = "<group>"; };
+		B63E7087204D67FD00EA7ECE /* PausableMovingAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PausableMovingAnnotation.m; sourceTree = "<group>"; };
 		B6F63DF61E2C6AA400741516 /* iOS_movingAnnotation_swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_movingAnnotation_swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F63DF81E2C6AA400741516 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6F63DFA1E2C6AA400741516 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 			children = (
 				B6F8F9F21E1CDA5A0036D1DC /* CustomMovingAnnotation.h */,
 				B6F8F9F31E1CDA5A0036D1DC /* CustomMovingAnnotation.m */,
+				B63E7086204D67FD00EA7ECE /* PausableMovingAnnotation.h */,
+				B63E7087204D67FD00EA7ECE /* PausableMovingAnnotation.m */,
 			);
 			path = MovingAnnotationSource;
 			sourceTree = "<group>";
@@ -425,13 +430,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS_movingAnnotation-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8408A74168B783605537BF4F /* [CP] Embed Pods Frameworks */ = {
@@ -455,9 +463,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iOS_movingAnnotation/Pods-iOS_movingAnnotation-resources.sh",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -470,13 +481,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOS_movingAnnotation_swift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E1EF1F98395857EC6C655F72 /* [CP] Embed Pods Frameworks */ = {
@@ -500,9 +514,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iOS_movingAnnotation_swift/Pods-iOS_movingAnnotation_swift-resources.sh",
+				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -524,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63E7088204D67FD00EA7ECE /* PausableMovingAnnotation.m in Sources */,
 				B6152BD51DBDDC2500254FC8 /* ViewController.m in Sources */,
 				B6F8F9F41E1CDA5A0036D1DC /* CustomMovingAnnotation.m in Sources */,
 				B6152BCC1DBDDC2500254FC8 /* main.m in Sources */,
