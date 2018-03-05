@@ -116,6 +116,8 @@ static CLLocationCoordinate2D s_coords[] =
 
 @property (nonatomic, strong) NSMutableArray *carsArray;
 
+@property (nonatomic, strong) UIButton *pauseBtn;
+
 @end
 
 @implementation ViewController
@@ -331,13 +333,17 @@ static CLLocationCoordinate2D s_coords[] =
     btn2.backgroundColor = [UIColor grayColor];
     [btn2 setTitle:@"pause" forState:UIControlStateNormal];
     [btn2 addTarget:self action:@selector(pause:) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.pauseBtn = btn2;
     [self.view addSubview:btn2];
 }
 
 #pragma mark - Action
 
 - (void)mov {
+    if(self.car1.isPaused) {
+        [self pause:self.pauseBtn];
+    }
+    
     double speed_car1 = 120.0 / 3.6; //80 km/h
     int count = sizeof(s_coords) / sizeof(s_coords[0]);
     [self.car1 setCoordinate:s_coords[0]];
@@ -360,6 +366,9 @@ static CLLocationCoordinate2D s_coords[] =
 }
 
 - (void)stop {
+    if(self.car1.isPaused) {
+        [self pause:self.pauseBtn];
+    }
     for(MAAnnotationMoveAnimation *animation in [self.car1 allMoveAnimations]) {
         [animation cancel];
     }
