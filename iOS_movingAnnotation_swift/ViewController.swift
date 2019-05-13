@@ -272,7 +272,7 @@ class ViewController: UIViewController, MAMapViewDelegate {
     }
     
     // MARK: - Action
-    func mov() {
+    @objc func mov() {
         let speed_car1: Double = 120.0 / 3.6
         //80 km/h
         let count: Int = s_coords.count
@@ -296,7 +296,7 @@ class ViewController: UIViewController, MAMapViewDelegate {
         }
     }
     
-    func stop() {
+    @objc func stop() {
         for animation: MAAnnotationMoveAnimation in self.car1.allMoveAnimations() {
             animation.cancel()
         }
